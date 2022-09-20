@@ -5,15 +5,10 @@ function Book(title, author, pages, read)
     this.pages = pages
     this.read = read
 
-}
-
-Book.prototype =
-{
-    info(){
-        console.log(title, "by", author,",", pages, "pages,", read)
+    this.info = function() {
+        return (title + " by " + author + ", " + pages + " pages, " + read)
     }
-    
 }
 
-const TheHobbit = new Book('TheHobbit', 'JRR Tolkien', 1093, 'not read');
-TheHobbit.info();
+const TheHobbit = new Book('The Hobbit', 'JRR Tolkien', 1093, 'not read');
+console.log(TheHobbit.info());
