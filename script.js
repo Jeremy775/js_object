@@ -1,17 +1,5 @@
 // Mon objet
-let myLibrary = [
-    {
-        title : 'un livre',
-        author : 'quelqun',
-        pages : 2324,
-        read : true
-    },{
-        title : 'Silmarillion',
-        author : 'Tolkien',
-        pages : 2324,
-        read : false
-    }
-];
+let myLibrary = [];
 
 
 // Constructeur de l'objet book
@@ -22,30 +10,11 @@ function Book(title, author, pages, read) {
     this.read = read
 }
 
-
-function inputBook () {
-
-    // Get reference to the form element
-    const form = document.getElementById("book-form");
-
-    // Get reference to the submit element of the form el
-    form.addEventListener('submit', callbackFunction);
-
-    function callbackFunction(event) {
-        event.preventDefault();
-        const myFormData = new FormData(event.target);
-
-        const formDataObj = Object.fromEntries(myFormData.entries());
-        myLibrary.push(formDataObj)
-    };
-    
-}
-// inputBook()
-
 function addBook (title, author, pages ,read)
 {
     let book = new Book(title, author, pages, read)
     myLibrary.push(book)
+    displayBooks()
 }
 
 
@@ -54,6 +23,13 @@ function displayBooks () {
 
     let table = document.getElementById('book-list');
 
+    // Supprime les anciens elements avant de tout réafficher dans la boucle
+    const rmv = document.querySelectorAll("#book-list tr")
+    for (let i = 0; i < rmv.length; i++) {
+        rmv[i].remove()
+    }
+
+    // Boucle dans la table myLibrary et affiche les elements
     myLibrary.forEach(myLibrary => {
         let tr = document.createElement('tr');
         for (let key in myLibrary) { 
@@ -65,6 +41,28 @@ function displayBooks () {
     });
 }
 
-addBook('The witcher', 'Sapowski', '1242', 'read')
+function inputBook () {
+    
+    const btn = document.getElementById("add-book")
+    btn.addEventListener('click', () => {
+
+        let titleForm = document.getElementById("title").value 
+        let authorForm = document.getElementById("author").value
+        let pagesForm = document.getElementById("pages").value
+        let readForm = document.getElementById("read").value
+
+        if ((titleForm == "") || (authorForm == "") || (pagesForm == "") || (readForm == "")) {
+            alert('Remplissez tous les champs')
+        }
+
+        addBook(titleForm, authorForm, pagesForm, readForm)
+
+        document.getElementById('book-form').reset()
+    })
+
+}
+inputBook()
+
+
 displayBooks()
 
