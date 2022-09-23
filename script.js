@@ -1,5 +1,12 @@
 // Mon objet
-let myLibrary = [];
+let myLibrary = [
+    {
+        title: 'One Piece',
+        author: 'Eichiro Oda',
+        pages: '12',
+        read:'lu',
+    }
+];
 
 
 // Constructeur de l'objet book
@@ -43,8 +50,7 @@ function displayBooks () {
 
 function inputBook () {
     
-    const btn = document.getElementById("add-book")
-    btn.addEventListener('click', () => {
+    document.getElementById("add-book").addEventListener('click', (e) => {
 
         let titleForm = document.getElementById("title").value 
         let authorForm = document.getElementById("author").value
@@ -56,13 +62,14 @@ function inputBook () {
         }
 
         addBook(titleForm, authorForm, pagesForm, readForm)
-
+        // console.log(myLibrary)
         document.getElementById('book-form').reset()
+        e.preventDefault()
     })
-
+    
 }
 inputBook()
 
-
+// console.log(myLibrary)
 displayBooks()
 
