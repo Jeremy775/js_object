@@ -44,6 +44,7 @@ function displayBooks () {
         td.innerHTML= myLibrary[key];
         tr.appendChild(td);
         };
+        tr.innerHTML += `<td><a href="#" class="delete">X</a></td>`
         table.appendChild(tr);
     });
 }
