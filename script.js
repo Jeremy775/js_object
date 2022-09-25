@@ -50,6 +50,11 @@ deleteBook()
 
 
 
+// Local Storage 
+
+// utiliser les data attribute qui contiendront un index dans le DOM pour pouvoir 
+// utiliser la methode splice() de deleteTarget()
+
 
 // Intègre les propriété de l'objet dans le html
 function displayBooks () {
@@ -98,7 +103,7 @@ function inputBook () {
 
         // On clear le formulaire
         document.getElementById('book-form').reset()
-        
+
         e.preventDefault()
     })
     
