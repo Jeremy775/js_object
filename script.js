@@ -28,61 +28,8 @@ function addBook (title, author, pages ,read)
 }
 
 
-
-function deleteBook ()
-{
-    document.getElementById('book-list').addEventListener('click', (e) => {
-
-        deleteTarget(e.target)
-
-        e.preventDefault()
-    })
-}
-
-
-function deleteTarget(target) {
-    if (target.className === 'delete') {
-        // target.parentElement.parentElement.remove()
-        myLibrary.splice(target, 1)
-    }
-}
-deleteBook()
-
-
-
-// Local Storage 
-
-// utiliser les data attribute qui contiendront un index dans le DOM pour pouvoir 
-// utiliser la methode splice() de deleteTarget()
-
-
-// Intègre les propriété de l'objet dans le html
-function displayBooks () {
-
-    let table = document.getElementById('book-list');
-
-    // Supprime les anciens elements avant de tout réafficher dans la boucle
-    const rmv = document.querySelectorAll("#book-list tr")
-    for (let i = 0; i < rmv.length; i++) {
-        rmv[i].remove()
-    }
-
-    // Boucle dans la table myLibrary et affiche les elements
-    myLibrary.forEach(myLibrary => {
-        let tr = document.createElement('tr');
-        for (let key in myLibrary) { 
-        let td = document.createElement('td');
-        td.innerHTML= myLibrary[key];
-        tr.appendChild(td);
-        };
-        tr.innerHTML += `<td><a href="#" class="delete">X</a></td>`
-        table.appendChild(tr);
-    });
-}
-
-
 // Prend les valeurs du formulaire et les transforme en objet
-function inputBook () {
+function storeBook () {
     
     document.getElementById("add-book").addEventListener('click', (e) => {
 
@@ -99,7 +46,6 @@ function inputBook () {
 
         // On renvoi les valeurs en paramètre pour créer le nouvel objet
         addBook(titleForm, authorForm, pagesForm, readForm)
-        // console.log(myLibrary)
 
         // On clear le formulaire
         document.getElementById('book-form').reset()
@@ -108,8 +54,74 @@ function inputBook () {
     })
     
 }
-inputBook()
+storeBook()
 
-// console.log(myLibrary)
+// On intègre les livres dans le HTML
+function displayBooks() {
+    const display = document.getElementById('books');
+    const books = document.querySelectorAll('.book');
+    books.forEach(book => display.removeChild(book));
+   
+    for (let i=0; i<myLibrary.length; i++){
+        createBook(myLibrary[i]);
+    }
+}
+
+// On créer les elements du DOM, a utiliser dans displayBooks();
+function createBook(item) {
+    const library = document.querySelector('#books');
+    const bookDiv = document.createElement('div');
+    const titleDiv = document.createElement('div');
+    const authDiv = document.createElement('div');
+    const pageDiv = document.createElement('div');
+    const removeBtn = document.createElement('button');
+    const readBtn = document.createElement('button');
+    
+    
+    bookDiv.classList.add('book');
+    bookDiv.setAttribute('id', myLibrary.indexOf(item));
+
+    titleDiv.textContent = item.title;
+    titleDiv.classList.add('title');
+    bookDiv.appendChild(titleDiv);
+
+    authDiv.textContent = item.author;
+    authDiv.classList.add('author');
+    bookDiv.appendChild(authDiv);
+
+    pageDiv.textContent = item.pages;
+    pageDiv.classList.add('pages');
+    bookDiv.appendChild(pageDiv);
+
+    readBtn.classList.add('readBtn')    
+    bookDiv.appendChild(readBtn);
+    if(item.read===false) {
+        readBtn.textContent = 'Not Read';
+        readBtn.style.backgroundColor = '#e04f63';
+    }else {
+        readBtn.textContent = 'Read';
+        readBtn.style.backgroundColor = '#63da63'
+    }
+
+    removeBtn.textContent = 'Remove'; 
+    removeBtn.setAttribute('id', 'removeBtn');
+    bookDiv.appendChild(removeBtn);
+    
+    library.appendChild(bookDiv);
+
+    removeBtn.addEventListener('click', () => {
+        myLibrary.splice(myLibrary.indexOf(item),1);
+        // setData()
+        displayBooks();
+    });
+
+    //add toggle ability to each book 'read' button on click
+    readBtn.addEventListener('click', () => { 
+        item.read = !item.read; 
+        // setData(); 
+        displayBooks();
+    }); 
+};
+
 displayBooks()
 
