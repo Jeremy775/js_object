@@ -35,10 +35,10 @@ function storeBook () {
         let titleForm = document.getElementById("title").value 
         let authorForm = document.getElementById("author").value
         let pagesForm = document.getElementById("pages").value
-        let readForm = document.getElementById("read").value
+        let readForm = document.getElementById("read").checked
 
         // on creer un message d'erreur si un des champs n'est pas rempli
-        if ((titleForm == "") || (authorForm == "") || (pagesForm == "") || (readForm == "")) {
+        if ((titleForm == "") || (authorForm == "") || (pagesForm == "")) {
             alert('Remplissez tous les champs')
         }
 
