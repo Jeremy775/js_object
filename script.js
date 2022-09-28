@@ -1,4 +1,3 @@
-// Mon objet
 let myLibrary = [
     {
         title: 'One Piece',
@@ -9,7 +8,6 @@ let myLibrary = [
 ];
 
 
-// Constructeur de l'objet book
 function Book(title, author, pages, read) {
     this.title = title
     this.author = author
@@ -17,7 +15,7 @@ function Book(title, author, pages, read) {
     this.read = read
 }
 
-// On introduit dynamiquement les parametre avec la fonction
+// On introduit dynamiquement les parametres liés à l'objet
 // On instancie la classe book avec ces parametres
 // on push les valeurs dans le tableau d'objet myLibrary
 function addBook (title, author, pages ,read)
@@ -62,6 +60,8 @@ function displayBooks() {
     const books = document.querySelectorAll('.book');
     books.forEach(book => display.removeChild(book));
    
+    // On boucle tous les elements du tableau pour créer dynamiquement un index 
+    // qui sera attaché a la classe book
     for (let i=0; i<myLibrary.length; i++){
         createBook(myLibrary[i]);
     }
@@ -79,6 +79,7 @@ function createBook(item) {
     
     
     bookDiv.classList.add('book');
+    // On utilise l'index incrémenté dans displayBooks()
     bookDiv.setAttribute('id', myLibrary.indexOf(item));
 
     titleDiv.textContent = item.title;
@@ -110,6 +111,7 @@ function createBook(item) {
     library.appendChild(bookDiv);
 
     removeBtn.addEventListener('click', () => {
+        // On utilise l'index incrémenté ds la classe book pour supprimer l'objet auquel il correspond ds le tableau myLibrary
         myLibrary.splice(myLibrary.indexOf(item),1);
         // setData()
         displayBooks();
