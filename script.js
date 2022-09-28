@@ -71,9 +71,9 @@ function displayBooks() {
 function createBook(item) {
     const library = document.querySelector('#books');
     const bookDiv = document.createElement('div');
-    const titleDiv = document.createElement('div');
-    const authDiv = document.createElement('div');
-    const pageDiv = document.createElement('div');
+    const titleDiv = document.createElement('h3');
+    const authDiv = document.createElement('h5');
+    const pageDiv = document.createElement('h5');
     const removeBtn = document.createElement('button');
     const readBtn = document.createElement('button');
     
