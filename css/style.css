@@ -66,6 +66,13 @@ button{
     cursor: pointer;
 } */
 
+
+#count {
+    background-color: #fff;
+    padding: 15px;
+}
+
+
 @media(max-width: 1240px){
     .team{
         width: 100%;
@@ -76,3 +83,4 @@ button{
         font-size: 3.2rem;
     }
 }
+

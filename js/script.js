@@ -26,6 +26,12 @@ function addBook (title, author, pages ,read)
 }
 
 
+function countBook() {
+    const BookCount = document.getElementById('count')
+    BookCount.textContent = 'Nombre de livres: ' + myLibrary.length
+}
+countBook()
+
 // Prend les valeurs du formulaire et les transforme en objet
 function storeBook () {
     
@@ -40,7 +46,8 @@ function storeBook () {
         // on creer un message d'erreur si un des champs n'est pas rempli
         if ((titleForm == "") || (authorForm == "") || (pagesForm == "")) {
             alert('Remplissez tous les champs')
-        }
+            return false
+        } 
 
         // On renvoi les valeurs en paramètre pour créer le nouvel objet
         addBook(titleForm, authorForm, pagesForm, readForm)
